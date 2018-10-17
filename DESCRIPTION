@@ -1,0 +1,11 @@
+Package: NullCheck
+Title: Check caller's args and stop if there are any NULLs. 
+Version: 0.2.0
+Authors@R: person("Weicheng", "Li", email = "itsaquestion@gmail.com", role = c("aut", "cre"))
+Description: Check caller's args and stop if there are any NULLs. 
+Depends: R (>= 3.4.4)
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Suggests: testthat
+RoxygenNote: 6.0.1
