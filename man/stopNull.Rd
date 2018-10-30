@@ -10,7 +10,7 @@ stopNull(except = NULL)
 \item{except}{args' name vector that should not to be checked}
 }
 \description{
-Check caller's args and stop if there are any NULLs.
+Check caller's args and stop if there are any NULL, all(NA) or zero-length vector.
 }
 \examples{
 add = function(a, b, c) {
