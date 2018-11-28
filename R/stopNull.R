@@ -2,7 +2,7 @@
 #'
 #' Check caller's args and stop if there are any NULL, all(NA) or zero-length vector. 
 #' @param except args' name vector that should not to be checked
-#'
+#' @param check_na check_na value. default false.
 #' @export
 #' @import stringr
 #' @importFrom glue glue
@@ -24,7 +24,7 @@
 #' }
 #' 
 #' add2(1, 2, NULL)
-stopNull = function(except = NULL) {
+stopNull = function(except = NULL,check_na = F) {
 
   # obj_list = list(a=1,b=NA,c=NULL,d=vector())
 	obj_list = parent.frame(n = 1)
@@ -32,7 +32,12 @@ stopNull = function(except = NULL) {
 	#print(obj_list)
 
   is_null_obj = checkNull(obj_list)
+
   is_na_obj = checkNA(obj_list)
+  if (!check_na) {
+    is_na_obj = is_na_obj & F
+  }
+
   is_len_0 = checkZeroLen(obj_list)
 
 	obj_names = names(is_null_obj)
@@ -59,10 +64,12 @@ stopNull = function(except = NULL) {
   if (nrow(df_null) > 0) {
     null_obj_names = paste0(paste(df_null$obj_names, "= NULL", collapse = ", "),", ")
   }
+
   na_obj_names = ""
   if (nrow(df_na) > 0) {
-    na_obj_names = paste0(paste(df_na$obj_names, "= NA", collapse = ", "),", ")
+    na_obj_names = paste0(paste(df_na$obj_names, "= NA", collapse = ", "), ", ")
   }
+ 
 
   len0_obj_names = ""
   if (nrow(df_len0) > 0) {

@@ -23,3 +23,17 @@ add2(1, 2, NULL)
 
 add2(1, 2, vector())
 
+
+
+add3 = function(a, b) {
+  stopNull()
+  a + b
+}
+
+a = c(1, 2, 3)
+b = c(1, 2, NA)
+add3(a, b)
+
+
+library(dplyr)
+add3(1, NA)
