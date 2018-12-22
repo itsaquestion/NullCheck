@@ -1,6 +1,4 @@
 library(testthat)
-library(NullArgsChecker)
+library(NullCheck)
 
-test_check("NullArgsChecker")
-
-
+test_check("NullCheck")

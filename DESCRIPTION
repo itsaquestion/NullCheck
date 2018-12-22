@@ -1,11 +1,15 @@
 Package: NullCheck
 Title: Check caller's args and stop if there are any NULLs. 
-Version: 0.5.1
+Version: 0.5.2
 Authors@R: person("Weicheng", "Li", email = "itsaquestion@gmail.com", role = c("aut", "cre"))
 Description: Check caller's args and stop if there are any NULL, all(NA) or zero-length vector. 
-Depends: R (>= 3.4.4)
+Depends: R (>= 3.5.0)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+Imports: dplyr,
+  glue,
+  magrittr,
+  stringr
 Suggests: testthat
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1

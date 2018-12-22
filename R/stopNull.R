@@ -1,6 +1,6 @@
 #' stopNull
 #'
-#' Check caller's args and stop if there are any NULL, all(NA) or zero-length vector. 
+#' Check caller's args and stop if there are any NULL, all(NA) or zero-length vector.
 #' @param except args' name vector that should not to be checked
 #' @param check_na check_na value. default false.
 #' @export
@@ -13,17 +13,17 @@
 #' 	stopNull()
 #' 	a + b + c
 #' }
-#' 
-#' add(1, 2, 3)
-#' 
-#' add(1, 2, NULL)
-#' 
+#'
+#' # add(1, 2, 3)
+#'
+#' # add(1, 2, NULL)
+#'
 #' add2 = function(a, b, c) {
 #' 	stopNull(except = "c")
 #' 	a + b
 #' }
-#' 
-#' add2(1, 2, NULL)
+#'
+#' # add2(1, 2, NULL)
 stopNull = function(except = NULL,check_na = F) {
 
   # obj_list = list(a=1,b=NA,c=NULL,d=vector())
@@ -69,7 +69,7 @@ stopNull = function(except = NULL,check_na = F) {
   if (nrow(df_na) > 0) {
     na_obj_names = paste0(paste(df_na$obj_names, "= NA", collapse = ", "), ", ")
   }
- 
+
 
   len0_obj_names = ""
   if (nrow(df_len0) > 0) {

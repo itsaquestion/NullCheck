@@ -20,14 +20,14 @@ add = function(a, b, c) {
 	a + b + c
 }
 
-add(1, 2, 3)
+# add(1, 2, 3)
 
-add(1, 2, NULL)
+# add(1, 2, NULL)
 
 add2 = function(a, b, c) {
 	stopNull(except = "c")
 	a + b
 }
 
-add2(1, 2, NULL)
+# add2(1, 2, NULL)
 }
