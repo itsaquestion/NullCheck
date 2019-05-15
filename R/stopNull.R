@@ -76,7 +76,7 @@ stopNull = function(except = NULL,check_na = F) {
     len0_obj_names = paste(df_len0$obj_names, "= Len0", collapse = ", ")
   }
 
-	error_message_0 = "Null args in function: \r\t{caller}({null_obj_names}{na_obj_names}{len0_obj_names})"
+	error_message_0 = "Null args in function: \n\t{caller}({null_obj_names}{na_obj_names}{len0_obj_names})"
 
   error_message = glue::glue(error_message_0) %>%
     stringr::str_replace(", \\)", "\\)")
