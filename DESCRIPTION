@@ -1,9 +1,9 @@
 Package: NullCheck
 Title: Check caller's args and stop if there are any NULLs. 
-Version: 0.5.4
+Version: 0.5.5
 Authors@R: person("Weicheng", "Li", email = "itsaquestion@gmail.com", role = c("aut", "cre"))
 Description: Check caller's args and stop if there are any NULL, all(NA) or zero-length vector. 
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.3.0)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
