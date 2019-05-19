@@ -26,24 +26,30 @@
 #' # add2(1, 2, NULL)
 stopNull = function(except = NULL,check_na = F) {
 
-  # obj_list = list(a=1,b=NA,c=NULL,d=vector())
+  # obj_list = list(a=1,b=NA,c=NULL,d=vector(),e=list(a=1,b=2))
 	obj_list = parent.frame(n = 1)
 
 	#print(obj_list)
 
   is_null_obj = checkNull(obj_list)
 
-  is_na_obj = checkNA(obj_list)
-  if (!check_na) {
-    is_na_obj = is_na_obj & F
+  if(check_na){
+    is_na_obj = checkNA(obj_list)
+  }else{
+    is_na_obj = rep(F,length(obj_list))
   }
+
 
   is_len_0 = checkZeroLen(obj_list)
 
 	obj_names = names(is_null_obj)
 
-  df = data.frame(obj_names, is_null_obj, is_na_obj, is_len_0,
+  is_list = checkIsList(obj_list)
+
+  df = data.frame(obj_names, is_null_obj, is_na_obj, is_len_0, is_list,
     stringsAsFactors = F)
+
+  df = dplyr::filter(df,!is_list)
 
 	if (!is.null(except)) {
     df = dplyr::filter(df, !(obj_names %in% except))
@@ -111,6 +117,16 @@ checkZeroLen = function(x) {
   })
 }
 
+checkIsList = function(x){
+  sapply(x, function(y) {
+    if (!is.null(y)) {
+      return(is.list(y))
+    }
+    else {
+      return(F)
+    }
+  })
+}
 
 
 
