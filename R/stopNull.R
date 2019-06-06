@@ -35,10 +35,14 @@ stopNull = function(except = NULL,check_na = F) {
 
   if(check_na){
     is_na_obj = checkNA(obj_list)
-  }else{
-    is_na_obj = rep(F,length(obj_list))
-  }
+  } else {
+    size = length(obj_list)
+    if ("..." %in% names(obj_list)) {
+      size = size - 1
+    }
+    is_na_obj = rep(F, size)
 
+  }
 
   is_len_0 = checkZeroLen(obj_list)
 
@@ -49,8 +53,13 @@ stopNull = function(except = NULL,check_na = F) {
   df = data.frame(obj_names, is_null_obj, is_na_obj, is_len_0, is_list,
     stringsAsFactors = F)
 
+
+  # no check list
   df = dplyr::filter(df,!is_list)
 
+  if (nrow(df) == 0) {return() }
+
+  # no check except
 	if (!is.null(except)) {
     df = dplyr::filter(df, !(obj_names %in% except))
 	}
