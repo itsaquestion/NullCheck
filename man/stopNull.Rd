@@ -4,12 +4,10 @@
 \alias{stopNull}
 \title{stopNull}
 \usage{
-stopNull(except = NULL, check_na = F)
+stopNull(except = NULL)
 }
 \arguments{
 \item{except}{args' name vector that should not to be checked}
-
-\item{check_na}{check_na value. default false.}
 }
 \description{
 Check caller's args and stop if there are any NULL, all(NA) or zero-length vector.

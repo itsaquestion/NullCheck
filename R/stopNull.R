@@ -2,7 +2,6 @@
 #'
 #' Check caller's args and stop if there are any NULL, all(NA) or zero-length vector.
 #' @param except args' name vector that should not to be checked
-#' @param check_na check_na value. default false.
 #' @export
 #' @import stringr
 #' @importFrom glue glue
@@ -24,34 +23,27 @@
 #' }
 #'
 #' # add2(1, 2, NULL)
-stopNull = function(except = NULL,check_na = F) {
+stopNull = function(except = NULL) {
 
-  # obj_list = list(a=1,b=NA,c=NULL,d=vector(),e=list(a=1,b=2))
+  # obj_list = list(a=1,b=NA,c=NULL,d=vector(),e=list(a=1,b=2),f=mean)
 	obj_list = parent.frame(n = 1)
 
 	#print(obj_list)
 
   is_null_obj = checkNull(obj_list)
 
-  if(check_na){
-    is_na_obj = checkNA(obj_list)
-  } else {
-    size = length(obj_list)
-    if ("..." %in% names(obj_list)) {
-      size = size - 1
-    }
-    is_na_obj = rep(F, size)
-
-  }
+  #is_na_obj = checkNA(obj_list)
 
   is_len_0 = checkZeroLen(obj_list)
 
-	obj_names = names(is_null_obj)
+  obj_names = names(is_null_obj)
 
   is_list = checkIsList(obj_list)
 
-  df = data.frame(obj_names, is_null_obj, is_na_obj, is_len_0, is_list,
-    stringsAsFactors = F)
+  suppressWarnings({
+    df = data.frame(obj_names, is_null_obj, is_len_0, is_list,
+      stringsAsFactors = F)
+  })
 
 
   # no check list
@@ -62,7 +54,11 @@ stopNull = function(except = NULL,check_na = F) {
   # no check except
 	if (!is.null(except)) {
     df = dplyr::filter(df, !(obj_names %in% except))
-	}
+  }
+
+  #if (!check_na) {
+    #df = dplyr::filter(df, !is_na_obj)
+  #}
 
   # all ok, return
   if (all(!df[, -1])) { return() }
@@ -84,7 +80,6 @@ stopNull = function(except = NULL,check_na = F) {
   if (nrow(df_na) > 0) {
     na_obj_names = paste0(paste(df_na$obj_names, "= NA", collapse = ", "), ", ")
   }
-
 
   len0_obj_names = ""
   if (nrow(df_len0) > 0) {
